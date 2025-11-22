@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <SheetTrigger className="md:hidden">
                 <Menu className="stroke-3"/>
               </SheetTrigger>
-              <SheetContent side="left" className="bg-gray-900 border-none text-white font-bold px-5 py-10 w-60">
+              <SheetContent side="left" className="bg-gray-900 border-none text-white font-bold px-5 py-10 w-60 h-full">
                 <nav className="flex flex-col gap-6 text-xl">
                   <Link href="/">Home</Link>
                   <Link href="/about-us">About Us</Link>

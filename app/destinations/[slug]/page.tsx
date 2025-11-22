@@ -2,6 +2,8 @@ import data from "@/data/destinations.json";
 import { DestinationPage } from "@/components/destinationPage";
 import { notFound } from "next/navigation";
 
+export const dynamicParams = false;
+
 type Destination = {
   link: string;
   destination: string;
