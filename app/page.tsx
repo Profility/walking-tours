@@ -16,7 +16,7 @@ export default function Home() {
         <h1 className="absolute top-1/2 md:left-10 transform -translate-y-1/2 text-5xl md:text-left text-center font-bold px-15 text-white text-shadow-md text-shadow-black">
           <span className={`${alex_brush.className} md:text-6xl text-4xl antialiased`}>Welcome to<br/></span>
           <i className="text-yellow-400 md:text-7xl text-5xl">LUCBAN, QUEZON</i><br/>
-          <span className="md:text-4xl text-xl">Yanong Rikit! Baling Ganda!</span>
+          <span className="md:text-4xl text-xl">Aba'y baling rikit at baling saya dini!</span>
         </h1>
       </div>
 

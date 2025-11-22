@@ -15,9 +15,6 @@ import {
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 
@@ -55,7 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="w-full bg-gray-900 text-white">
           <div className="px-4 md:px-10 py-2 flex flex-wrap justify-between">
 
-            {/* Mobile Navigation */}
             <Sheet>
               <SheetTrigger className="md:hidden">
                 <Menu className="stroke-3"/>
@@ -69,7 +65,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </SheetContent>
             </Sheet>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex">
               <NavigationMenu>
                   <NavigationMenuList className="gap-8">
@@ -100,7 +95,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </NavigationMenu>
             </div>
 
-            {/* Searchbar */}
             <form onSubmit={handleSubmit}>
               <div>
                 <InputGroup className="border-gray-600">
