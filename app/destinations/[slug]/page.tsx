@@ -29,9 +29,12 @@ export default function Page({ params }: { params: Params }) {
 
   const dest = (data as Destination[]).find(d => d.link === slug);
 
-  if (!dest) {
-    notFound();
-  }
+//   if (!dest) {
+//     notFound();
+//   }
+if (!dest) {
+  return <h1>DESTINATION NOT FOUND: {params.slug}</h1>;
+}
 
   const heroImage = dest!.showcaseImages.length > 0 ? dest!.showcaseImages : [dest!.preview];
 
