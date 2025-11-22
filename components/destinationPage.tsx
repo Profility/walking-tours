@@ -30,8 +30,8 @@ export function DestinationPage({ destination, image, title, description, embed}
           </div>
         </div>
     
-        <div className="w-full mx-auto py-50 md:py-10 flex flex-row justify-center gap-26">
-          <div className="w-160 pr-6">
+        <div className="w-full mx-auto py-50 md:py-10 flex max-w-100 md:max-w-300 md:flex-row flex-col justify-center gap-26">
+          <div className="md:w-160 md:pr-6">
             <h1 className="font-bold text-2xl">{title}</h1><br/>
             <p className="text-xl text-justify">{description}</p>  
           </div>  

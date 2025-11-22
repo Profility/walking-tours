@@ -1,5 +1,6 @@
 import data from "@/data/destinations.json";
 import { DestinationPage } from "@/components/destinationPage";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: { slug: string };
@@ -16,7 +17,7 @@ export default async function Page({ params }: PageProps) {
   const dest = data.find((d) => d.link === slug);
 
   if (!dest) {
-    return <h1>Destination not found</h1>;
+    return notFound();
   }
 
   const heroImages =
