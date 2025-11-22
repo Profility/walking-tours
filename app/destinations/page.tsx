@@ -6,6 +6,8 @@ import destinations from '@/data/destinations.json';
 export default function Home() {
 const natureSites = destinations.filter(d => d.category === "nature");
 const faithSites = destinations.filter(d => d.category === "faith");
+const heritageSites = destinations.filter(d => d.category === "heritage");
+
 
   return (
     <div className='flex flex-col items-center'>
