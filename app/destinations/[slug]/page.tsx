@@ -1,44 +1,28 @@
-export const dynamicParams = false;
-
 import data from "@/data/destinations.json";
 import { DestinationPage } from "@/components/destinationPage";
 
-type Destination = {
-  link: string;
-  destination: string;
-  infoTitle: string;
-  infoDescription: string;
-  mapsEmbed: string;
-  showcaseImages: string[];
-  preview: string;
-};
-
-type Params = {
-  slug: string;
-};
-
-export async function generateStaticParams() {
-  const slugs = data.map(d => d.link);
-  console.log("GENERATING SLUGS:", slugs);
-  return slugs.map(slug => ({ slug }));
+interface PageProps {
+  params: { slug: string };
 }
 
-export default function Page({ params }: { params: { slug?: string } }) {
-  // Guard against missing slug
-  if (!params?.slug) {
-    return <h1>No destination specified</h1>;
-  }
+export async function generateStaticParams() {
+  return data.map((d) => ({
+    slug: d.link,
+  }));
+}
 
-  const slug = params.slug.toLowerCase().trim();
-
-  // Normalize JSON links to match the URL
-  const dest = data.find(d => d.link.toLowerCase().trim() === slug);
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const dest = data.find((d) => d.link === slug);
 
   if (!dest) {
-    return <h1>DESTINATION NOT FOUND: {slug}</h1>;
+    return <h1>Destination not found</h1>;
   }
 
-  const heroImages = dest.showcaseImages.length > 0 ? dest.showcaseImages : [dest.preview];
+  const heroImages =
+    dest.showcaseImages && dest.showcaseImages.length > 0
+      ? dest.showcaseImages
+      : [dest.preview];
 
   return (
     <DestinationPage
