@@ -1,8 +1,8 @@
+export const dynamicParams = false;
+
 import data from "@/data/destinations.json";
 import { DestinationPage } from "@/components/destinationPage";
 import { notFound } from "next/navigation";
-
-export const dynamicParams = false;
 
 type Destination = {
   link: string;
@@ -18,7 +18,7 @@ type Params = {
   slug: string;
 };
 
-export async function generateStaticParams(): Promise<Params[]> {
+export async function generateStaticParams() {
   return data.map(d => ({
     slug: d.link // must match your `[slug]` param
   }));
