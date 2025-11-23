@@ -30,7 +30,7 @@ export function ShowcaseCarousel({images}: ShowcaseCarouselProps) {
     
 
   return (
-    <div className="w-full bg-gray-100 relative h-150 md:h-170 z-0">
+    <div className="w-full bg-gray-100 relative h-screen z-0">
         {imageList.map((img, index) => (
           <Image
             key={img}
