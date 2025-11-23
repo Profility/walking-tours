@@ -16,7 +16,7 @@ type DestinationCardProps = {
 
 export function DestinationCard({ destination, description, link, preview }: DestinationCardProps) {
   return (
-    <Card className="p-0">
+    <Card className="p-0 transition-transform duration-300 hover:scale-105">
       <Link href={`destinations/${link}`}>
         <Image
           src={preview}
