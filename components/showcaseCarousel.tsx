@@ -21,7 +21,7 @@ export function ShowcaseCarousel({images}: ShowcaseCarouselProps) {
     if (imageList.length > 1) {
         const interval = setInterval(() => {
         setCurrent((prev) => (prev + 1) % imageList.length);
-        }, 4000);
+        }, 7000);
 
         return () => clearInterval(interval);
     }
