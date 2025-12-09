@@ -17,7 +17,7 @@ export function DestinationPage({ destination, image, title, description, embed}
 
           <ShowcaseCarousel images={image}/>
     
-          <div className="absolute inset-0 flex items-center px-40 text-shadow-md text-shadow-black">
+          <div className="absolute inset-0 flex items-center px-15 md:px-25 text-shadow-md text-shadow-black">
     
             <h1 className="text-white font-bold">
               <span className="text-lg">
