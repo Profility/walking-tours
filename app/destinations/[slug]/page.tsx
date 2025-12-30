@@ -1,7 +1,7 @@
 import { getDestinationBySlug, getAllDestinationSlugs } from "@/lib/supabase";
 import { DestinationPage } from "@/components/destinationPage";
 import { notFound } from "next/navigation";
-
+import { getImageBySlug } from "@/lib/utils";
 interface PageProps {
   params: { slug: string };
 }
@@ -18,15 +18,15 @@ export default async function Page({ params }: PageProps) {
 
   const dest = await getDestinationBySlug(slug);
 
+  const image = getImageBySlug(slug);
   if (!dest) return notFound();
 
   return (
     <DestinationPage
       destination={dest.destination}
-      title={dest.title}
-      description={dest.description}
       embed={dest.embed}
-      image={dest.images}
+      content={dest.content}
+      image={image}
     />
   );
 }

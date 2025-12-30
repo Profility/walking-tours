@@ -2,6 +2,7 @@
 
 import { DestinationCard } from '@/components/destinationCard';
 import { retrieveDestinations } from '@/lib/supabase';
+import { getImageBySlug } from '@/lib/utils';
 
 export default async function Home() {
 
@@ -22,15 +23,19 @@ export default async function Home() {
           <div key={cat.name}>
             <span className='font-bold text-2xl'>{cat.name}</span>
             <div className='grid gap-4 py-8 text-justify grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(200px,auto))] justify-center'>
-              {cat.data.map((d) => (
-                <DestinationCard
-                  key={d.slug}
-                  destination={d.destination}
-                  description={d.location}
-                  link={d.slug}
-                  preview={d.images}
-                />
-              ))}
+               {cat.data.map((d) => {
+                const image = getImageBySlug(d.slug);
+
+                return (
+                  <DestinationCard
+                    key={d.slug}
+                    destination={d.destination}
+                    description={d.location}
+                    link={d.slug}
+                    preview={image}
+                  />
+                );
+              })}
             </div>
           </div>
         ))}

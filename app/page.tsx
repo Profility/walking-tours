@@ -1,7 +1,7 @@
 import { Alex_Brush } from "next/font/google";
 import { ShowcaseCarousel } from "@/components/showcaseCarousel";
-import { getDestinationImages } from "@/lib/supabase";
-const destinations = await getDestinationImages();
+import { getAllImages } from "@/lib/utils";
+const destinations = await getAllImages();
 
 const alex_brush = Alex_Brush({ subsets: ["latin"], weight: "400"});
 const images = destinations;

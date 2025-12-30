@@ -1,17 +1,25 @@
 "use client";
 
 import { ShowcaseCarousel } from "./showcaseCarousel";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+import { getImageBySlug } from "@/lib/utils";
+import { useParams } from "next/navigation";
+
 
 type DestinationPageProps = {
   destination: string;
   image: string | string[];
-  title: string;
-  description: string,
   embed: string;
-  categoryLabel?: string;
+  category?: string;
+  content?: string;
 };
 
-export function DestinationPage({ destination, image, title, description, embed, categoryLabel = "DESTINATION"}: DestinationPageProps) {
+export function DestinationPage({ destination, embed, content, category = "DESTINATION"}: DestinationPageProps) {
+  const params = useParams();
+  const slug = params.slug as string;
+  const image = getImageBySlug(slug);
   return (
     <div>
         <div className="w-full bg-gray-100 relative ">
@@ -22,7 +30,7 @@ export function DestinationPage({ destination, image, title, description, embed,
     
             <h1 className="text-white font-bold">
               <span className="text-lg">
-                {categoryLabel.toUpperCase()}<br />
+                {category.toUpperCase()}<br />
               </span>
               <span className="text-4xl">
                 {destination}
@@ -31,12 +39,22 @@ export function DestinationPage({ destination, image, title, description, embed,
           </div>
         </div>
     
-        <div className="w-full mx-auto py-10 flex max-w-85 md:max-w-300 md:flex-row flex-col justify-center md:gap-26 gap-10">
-          <div className="md:w-160 md:pr-6">
-            <h1 className="font-bold text-2xl">{title}</h1><br/>
-            <p className="md:text-lg text-base text-justify">{description}</p>  
-          </div>  
-    
+        <div className="w-full mx-auto py-10 flex max-w-85 md:max-w-300 md:flex-row flex-col justify-center md:gap-10 gap-5">
+          <div className="prose prose-lg md:w-160 md:pr-6">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm, remarkBreaks]}
+              components={{
+                h1: ({ node, ...props }) => <h1 className="text-2xl font-bold py-3" {...props} />,
+                h2: ({ node, ...props }) => <h2 className="text-xl font-semibold py-3" {...props} />,
+                p: ({ node, ...props }) => <p className="text-base md:text-lg py-3" {...props} />,
+                li: ({ node, ...props }) => <li className="ml-6 list-disc" {...props} />,
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </div>
+
+
           <div>
              <iframe className="border-0 h-85 w-85 rounded-xl" src={embed} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
           </div>

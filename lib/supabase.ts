@@ -8,7 +8,7 @@ export const supabase = createClient(
 export async function retrieveDestinations(category?: string) {
   let query = supabase
     .from("destinations")
-    .select("slug, destination, location, images");
+    .select("slug, destination, location");
 
   if (category) query = query.eq("category", category);
 
@@ -48,7 +48,7 @@ export async function getAllDestinationSlugs(options?: { excludeCategory?: strin
 export async function getDestinationBySlug(slug: string) {
   const { data, error } = await supabase
     .from("destinations")
-    .select("destination, title, description, location, images, embed")
+    .select("destination, location, content, embed")
     .eq("slug", slug)
     .maybeSingle();
 
@@ -58,18 +58,4 @@ export async function getDestinationBySlug(slug: string) {
   }
 
   return data;
-}
-
-
-export async function getDestinationImages(){
-  const { data, error } = await supabase
-    .from("destinations")
-    .select("images");
-
-  if (error) {
-    console.error("Error fetching images:", error);
-    return [];
-  }
-
-  return data?.map(d => d.images as string) ?? [];
 }

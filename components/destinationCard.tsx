@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card"
 import Link from 'next/link';;
 import Image from 'next/image';
+import { getImageBySlug } from "@/lib/utils";
 
 type DestinationCardProps = {
   destination: string;
@@ -14,7 +15,9 @@ type DestinationCardProps = {
   preview: string;
 };
 
-export function DestinationCard({ destination, description, link, preview }: DestinationCardProps) {
+export function DestinationCard({ destination, description, link }: DestinationCardProps) {
+
+  const preview = getImageBySlug(link);
   return (
     <Card className="p-0 transition-transform duration-300 hover:scale-105">
       <Link href={`destinations/${link}`}>
