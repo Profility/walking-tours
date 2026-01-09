@@ -34,8 +34,6 @@ export default function Navbar({ items }: { items: Item[] }) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!query.trim()) return;
-
-    // find the first matching item by name
     const matchedItem = items.find(item =>
       item.name.toLowerCase() === query.toLowerCase().trim()
     );
