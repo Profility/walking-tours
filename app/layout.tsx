@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     })),
     ...food.map((f) => ({
       name: f.name,
-      path: `/food/${f.slug}`,
+      path: `/food#${f.slug}`,
     })),
   ];
 
