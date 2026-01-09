@@ -14,12 +14,14 @@ type DestinationPageProps = {
   embed: string;
   category?: string;
   content?: string;
+  location?: string;
 };
 
-export function DestinationPage({ destination, embed, content, category = "DESTINATION"}: DestinationPageProps) {
+export function DestinationPage({ destination, embed, content, category = "DESTINATION", location}: DestinationPageProps) {
   const params = useParams();
   const slug = params.slug as string;
   const image = getImageBySlug(slug);
+
   return (
     <div>
         <div className="w-full bg-gray-100 relative ">
@@ -33,13 +35,16 @@ export function DestinationPage({ destination, embed, content, category = "DESTI
                 {category.toUpperCase()}<br />
               </span>
               <span className="text-4xl">
-                {destination}
+                {destination}<br/>
+              </span>
+              <span className="text-lg">
+                {location}
               </span>
             </h1>
           </div>
         </div>
     
-        <div className="w-full mx-auto py-10 flex max-w-85 md:max-w-300 md:flex-row flex-col justify-center md:gap-10 gap-5">
+        <div className="w-full mx-auto py-10 flex max-w-85 md:max-w-300 md:flex-row flex-col justify-center md:gap-5 gap-5">
           <div className="prose prose-lg md:w-160 md:pr-6">
             <ReactMarkdown
               remarkPlugins={[remarkGfm, remarkBreaks]}
@@ -54,9 +59,8 @@ export function DestinationPage({ destination, embed, content, category = "DESTI
             </ReactMarkdown>
           </div>
 
-
           <div>
-             <iframe className="border-0 h-85 w-85 rounded-xl" src={embed} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+             <iframe className="border-0 h-65 w-75 rounded-xl" src={embed} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
