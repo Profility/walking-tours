@@ -1,8 +1,6 @@
 import {
   Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+  CardFooter,
 } from "@/components/ui/card"
 import Link from 'next/link';;
 import Image from 'next/image';
@@ -20,20 +18,20 @@ export function DestinationCard({ destination, description, link, type}: Destina
 
   const preview = getImageBySlug(link);
   return (
-    <Card className="overflow-hidden p-0 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-      <Link href={`${type}/${link}`}>
-        <Image
-          src={preview}
-          alt={destination}
-          width={200}
-          height={200}
-          className="h-[200px] object-cover rounded-t-md"
-        />
-        <CardHeader className="p-4">
-          <CardTitle className="text-base font-semibold">{destination}</CardTitle>
-          <CardDescription className="text-sm text-muted-foreground line-clamp-2">{description}</CardDescription>
-        </CardHeader>
-      </Link>
-    </Card>
+    <div className="relative">
+      <Card className="overflow-hidden p-0 w-full">
+        <Link href={`${type}/${link}`} className="block w-full h-50 relative">
+          <Image
+            src={preview}
+            alt={destination}
+            fill
+            className="object-cover transition-transform duration-500 ease-out hover:scale-115"
+          />
+          <CardFooter className="absolute bottom-0 left-0 p-2 text-white font-bold drop-shadow-lg bg-linear-to-t from-black/55 to-transparent w-full">
+            {destination}
+          </CardFooter>
+        </Link>
+      </Card>
+    </div>
   );
 }
