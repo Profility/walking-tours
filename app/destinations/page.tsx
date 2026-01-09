@@ -20,11 +20,12 @@ export default async function Home() {
 
   return (
     <div className='flex flex-col items-center w-full px-4 py-15'>
-      <div className='text-center py-10 w-full max-w-7xl'>
+      <div className='text-center py-10 w-full max-w-6xl'>
         {categories.map((cat) => (
           <div key={cat.name}>
             <span className='font-bold text-2xl'>{cat.name}</span>
-            <div className='grid gap-4 py-8 text-justify grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(200px,auto))] justify-center'>
+            <br/><br/><hr/>
+            <div className='grid gap-4 py-8 text-justify grid-cols-1 sm:grid-cols-3 md:grid-cols-4 justify-center'>
                {cat.data.map((d) => {
                 const image = getImageBySlug(d.slug);
 
