@@ -14,7 +14,7 @@ type DestinationCardProps = {
   type: string;
 };
 
-export function DestinationCard({ destination, description, link, type}: DestinationCardProps) {
+export function DestinationCard({ destination, link, type}: DestinationCardProps) {
 
   const preview = getImageBySlug(link);
   return (
@@ -25,7 +25,7 @@ export function DestinationCard({ destination, description, link, type}: Destina
             src={preview}
             alt={destination}
             fill
-            className="object-cover transition-transform duration-500 ease-out hover:scale-115"
+            className="object-cover transition-transform duration-500 ease-out hover:scale-105"
           />
           <CardFooter className="absolute bottom-0 left-0 p-2 text-white font-bold drop-shadow-lg bg-linear-to-t from-black/55 to-transparent w-full">
             {destination}
