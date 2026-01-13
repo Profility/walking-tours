@@ -43,7 +43,7 @@ export default function Home() {
             <AccordionTrigger className="text-xl">Where can I find the source-code?</AccordionTrigger>
             <AccordionContent className="text-md">
               <p>
-                The source-code for this website is publicly available on GitHub. You can access the repository through this {anchor({ href: "https://github.com/Profility/walking-tours", children: "link" })}.
+                The source-code for this website is publicly available on GitHub. You can access the repository through this {anchor({ href: "https://github.com/lakbay-lucban/website", children: "link" })}.
               </p>
             </AccordionContent>
           </AccordionItem>
