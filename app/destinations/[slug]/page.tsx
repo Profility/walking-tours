@@ -1,3 +1,5 @@
+export const revalidate = 10;
+
 import { getInfoBySlug, getAllSlugs } from "@/lib/supabase";
 import { DestinationPage } from "@/components/destinationPage";
 import { notFound } from "next/navigation";

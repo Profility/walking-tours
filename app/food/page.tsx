@@ -1,3 +1,5 @@
+export const revalidate = 10;
+
 import { retrieveData } from "@/lib/supabase";
 import { getImageBySlug } from "@/lib/utils";
 import Image from "next/image";

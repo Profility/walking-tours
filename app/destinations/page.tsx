@@ -1,4 +1,4 @@
-
+export const revalidate = 10;
 
 import { DestinationCard } from '@/components/destinationCard';
 import { retrieveData } from '@/lib/supabase';
