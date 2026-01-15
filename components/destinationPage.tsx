@@ -12,12 +12,11 @@ type DestinationPageProps = {
   destination: string;
   image: string | string[];
   embed: string;
-  category?: string;
   content?: string;
   location?: string;
 };
 
-export function DestinationPage({ destination, embed, content, category = "DESTINATION", location}: DestinationPageProps) {
+export function DestinationPage({ destination, embed, content, location}: DestinationPageProps) {
   const params = useParams();
   const slug = params.slug as string;
   const image = getImageBySlug(slug);
@@ -32,7 +31,7 @@ export function DestinationPage({ destination, embed, content, category = "DESTI
     
             <h1 className="text-white font-bold">
               <span className="text-lg">
-                {category.toUpperCase()}<br />
+                DESTINATION
               </span>
               <span className="text-4xl">
                 {destination}<br/>
