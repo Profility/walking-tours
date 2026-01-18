@@ -122,10 +122,10 @@ export default function EditDestinationForm({ destination }: EditDestinationForm
                     <FieldLegend>Content</FieldLegend>
                     <div data-color-mode="light">
                         <div className="md:hidden flex flex-col gap-5">
-                            <MDEditor value={content} onChange={setContent} height="100%" preview="edit"/>
+                            <MDEditor value={content} onChange={(val) => setContent(val ?? "")} height="100%" preview="edit"/>
                         </div>
                         <div className="hidden md:block">
-                            <MDEditor value={content} onChange={setContent} height="100%" preview="live"/>
+                            <MDEditor value={content} onChange={(val) => setContent(val ?? "")} height="100%" preview="live"/>
                         </div>
                     </div>
                 </FieldSet>
