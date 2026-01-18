@@ -8,7 +8,7 @@ export const supabase = createClient(
 export async function retrieveData(type: string, category?: string) {
   let query = supabase
     .from(type)
-    .select("slug, name, description");
+    .select("slug, name, description, category");
 
   if (category) query = query.eq("category", category);
 

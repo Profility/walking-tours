@@ -5,17 +5,22 @@ import { retrieveData } from '@/lib/supabase';
 import { getImageBySlug } from '@/lib/utils';
 
 export default async function Home() {
+  // Single query to fetch all destinations (much faster than 4 separate queries)
+  const allDestinations = await retrieveData("destinations");
 
-  const nature = await retrieveData("destinations", "nature");
-  const resortandhotel = await retrieveData("destinations","resortandhotel");
-  const faith = await retrieveData("destinations","faith");
-  const heritage = await retrieveData("destinations","heritage");
+  // Group destinations by category in JavaScript
+  const groupedByCategory = {
+    nature: allDestinations.filter(d => d.category === "nature"),
+    resortandhotel: allDestinations.filter(d => d.category === "resortandhotel"),
+    faith: allDestinations.filter(d => d.category === "faith"),
+    heritage: allDestinations.filter(d => d.category === "heritage"),
+  };
 
   const categories = [
-    { name: "Stay at Resorts and Hotels", data: resortandhotel },
-    { name: "Discover Nature", data: nature },
-    { name: "Explore Our Heritage", data: heritage },
-    { name: "Visit Faith Sites", data: faith },
+    { name: "Stay at Resorts and Hotels", data: groupedByCategory.resortandhotel },
+    { name: "Discover Nature", data: groupedByCategory.nature },
+    { name: "Explore Our Heritage", data: groupedByCategory.heritage },
+    { name: "Visit Faith Sites", data: groupedByCategory.faith },
   ];
 
   return (
