@@ -13,10 +13,13 @@ export default async function DashboardPage() {
     redirect("/dashboard/login");
   }
 
-  const { data: destinations = [], error: destError } = await supabase
-    .from("destinations")
-    .select("slug, name, description")
-    .eq("owner_id", user.id);
+  const { data, error: destError } = await supabase
+  .from("destinations")
+  .select("slug, name, description")
+  .eq("owner_id", user.id);
+
+  const destinations = data ?? [];
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-25 px-4">
