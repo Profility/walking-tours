@@ -66,10 +66,10 @@ export function DestinationPage({ destination, embed, content, description}: Des
             <br/>
             <span className="font-bold">About This Page</span><br/><br/>
             <div className="flex flex-col gap-3">
-              <span className="flex gap-2"><Phone/>+63 977 654 0972</span>
-              <span className="flex gap-2"><Mail/>mrcusclpe@gmail.com</span>
-              <span className="flex gap-2"><Facebook/>Kamay ni Hesus</span>
-              <span className="flex gap-2"><MapPin/>Sitio Kanluran, Brgy. Aliliw</span>
+              <span className="flex gap-2"><Phone/>+63 000 000 0000</span>
+              <span className="flex gap-2"><Mail/>your-email@gmail.com</span>
+              <span className="flex gap-2"><Facebook/>Juan Dela Cruz</span>
+              <span className="flex gap-2"><MapPin/>Sample St., Brgy. Example</span>
             </div>
           </div>
         </div>
