@@ -36,6 +36,7 @@ export function ShowcaseCarousel({images}: ShowcaseCarouselProps) {
             key={img}
             src={img}
             fill
+            sizes="100vw"
             alt="Showcase Carousel"
             className={`brightness-75 object-cover top-0 left-0 w-full h-full transition-opacity duration-1000 ${
               index === current ? "opacity-100 z-0" : "opacity-0 z-0"

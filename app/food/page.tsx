@@ -26,6 +26,7 @@ export default async function Home() {
                   src={getImageBySlug(item.slug)}
                   alt={item.name}
                   fill
+                  sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
                   className="object-cover rounded"
                 />
               </div>
