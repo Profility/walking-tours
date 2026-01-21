@@ -24,7 +24,7 @@ type Destination = {
   description: string;
   content: string | null;
   embed: string | null;
-  image: string | null;
+  image?: string | null;
   about_page: {
     phone?: string;
     email?: string;
