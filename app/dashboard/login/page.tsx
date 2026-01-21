@@ -56,7 +56,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <FieldSet>
                 <FieldGroup>
-                    <FieldTitle>Login to dashboard</FieldTitle>
+                    <FieldTitle>Sign in to dashboard</FieldTitle>
                     <FieldDescription>Access your dashboard and manage your destinations.</FieldDescription>
                     <Field>
                         <FieldLabel>Email address</FieldLabel>
