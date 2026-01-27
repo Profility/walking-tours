@@ -59,7 +59,8 @@ export async function PUT(
       const ext = image.name.split('.').pop();
       const filePath = `${slug}.${ext}`;
 
-      const { error: uploadError } = await supabase.storage
+      const storageClient = createServerStorageClient();
+      const { error: uploadError } = await storageClient.storage
         .from('Images')
         .upload(filePath, image, { upsert: true, contentType: image.type });
 
@@ -68,8 +69,11 @@ export async function PUT(
       }
     }
 
+    // Use service role client for superadmins to bypass RLS
+    const updateClient = isSuperAdmin ? createServerStorageClient() : supabase;
+
     // Update destination
-    const { data: updated, error: updateError } = await supabase
+    const updateQuery = updateClient
       .from('destinations')
       .update({
         name,
@@ -78,8 +82,13 @@ export async function PUT(
         embed,
         about_page,
       })
-      .eq('slug', slug)
-      .eq('owner_id', user.id)
+      .eq('slug', slug);
+
+    if (!isSuperAdmin) {
+      updateQuery.eq('owner_id', user.id);
+    }
+
+    const { data: updated, error: updateError } = await updateQuery
       .select()
       .single();
 
