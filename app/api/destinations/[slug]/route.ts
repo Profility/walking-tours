@@ -1,6 +1,86 @@
 import { createClient, createServerStorageClient } from '@/lib/supabase-server';
 import { NextResponse } from 'next/server';
 
+export async function POST(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params;
+    const supabase = await createClient();
+    // Get current user
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    // Get create data
+    const formData = await request.formData();
+    const category = formData.get('category') as string;
+    const name = formData.get('name') as string;
+    const description = formData.get('description') as string;
+    const content = formData.get('content') as string;
+    const embed = formData.get('embed') as string;
+    const about_page_raw = formData.get('about_page');
+    const about_page =
+      typeof about_page_raw === "string" && about_page_raw.trim() !== ""
+        ? JSON.parse(about_page_raw)
+        : null;
+
+    const image = formData.get('image') as File | null;
+    if (image && image.size > 0) {
+      const ext = image.name.split('.').pop();
+      const filePath = `${slug}.${ext}`;
+
+      const storageClient = createServerStorageClient();
+      const { error: uploadError } = await storageClient.storage
+        .from('Images')
+        .upload(filePath, image, { upsert: true, contentType: image.type });
+
+      if (uploadError) {
+        return NextResponse.json({ error: uploadError.message }, { status: 500 });
+      }
+    }
+
+    // Insert new destination
+    const { data: created, error: insertError } = await supabase
+      .from('destinations')
+      .insert({
+        category,
+        slug,
+        name,
+        description,
+        content,
+        embed,
+        about_page,
+        owner_id: user.id,
+      })
+      .select()
+      .single();
+
+    if (insertError) {
+      return NextResponse.json(
+        { error: insertError.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ 
+      success: true,
+      data: created 
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'An error occurred while creating the destination' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
