@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import MDEditor from '@uiw/react-md-editor';
 import {
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldLegend,
@@ -57,6 +56,7 @@ export default function CreateButton() {
       const formData = new FormData();
       formData.append("category", category);
       formData.append("name", name);
+      formData.append("slug", slug);
       formData.append("description", description);
       formData.append("content", content);
       formData.append("embed", embed);
@@ -133,7 +133,10 @@ export default function CreateButton() {
                 </FieldGroup>
                 <FieldGroup className="flex flex-col gap-3">
                   <FieldLabel>Name *</FieldLabel>
-                  <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                  <Input id="name" value={name} onChange={(e) => {
+                    setName(e.target.value);
+                    setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, ''));
+                  }} required />
                 </FieldGroup>
                 <FieldGroup className="flex flex-col gap-3">
                   <FieldLabel>Description *</FieldLabel>
@@ -179,25 +182,25 @@ export default function CreateButton() {
                   <Input id="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Street, Barangay, City" />
                 </FieldGroup>
               </FieldSet>
+              {error && (
+                  <div className="text-red-600 text-sm bg-red-50 p-3 rounded mr-4">
+                    {error}
+                  </div>
+                )}
+                {success && (
+                  <div className="text-green-600 text-sm bg-green-50 p-3 rounded mr-4">
+                    Destination created successfully!
+                  </div>
+                )}
+               <DialogFooter>
+                <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+                <Button type="submit" className="bg-gray-900" disabled={loading}>
+                  {loading ? "Creating..." : "Create Destination"}
+                </Button>
+              </DialogFooter>
             </form>
           </FieldGroup>
         </div>
-        <DialogFooter>
-          {error && (
-            <div className="text-red-600 text-sm bg-red-50 p-3 rounded mr-4">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="text-green-600 text-sm bg-green-50 p-3 rounded mr-4">
-              Destination created successfully!
-            </div>
-          )}
-          <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-          <Button type="submit" className="bg-gray-900" disabled={loading} form="create-form">
-            {loading ? "Creating..." : "Create Destination"}
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

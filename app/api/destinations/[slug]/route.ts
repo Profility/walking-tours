@@ -31,12 +31,12 @@ export async function POST(
         ? JSON.parse(about_page_raw)
         : null;
 
+    const storageClient = createServerStorageClient();
     const image = formData.get('image') as File | null;
     if (image && image.size > 0) {
       const ext = image.name.split('.').pop();
       const filePath = `${slug}.${ext}`;
 
-      const storageClient = createServerStorageClient();
       const { error: uploadError } = await storageClient.storage
         .from('Images')
         .upload(filePath, image, { upsert: true, contentType: image.type });
@@ -47,7 +47,7 @@ export async function POST(
     }
 
     // Insert new destination
-    const { data: created, error: insertError } = await supabase
+    const { data: created, error: insertError } = await storageClient
       .from('destinations')
       .insert({
         category,
@@ -57,7 +57,6 @@ export async function POST(
         content,
         embed,
         about_page,
-        owner_id: user.id,
       })
       .select()
       .single();
