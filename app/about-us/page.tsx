@@ -1,5 +1,3 @@
-"use client";
-
 export const revalidate = 10;
 
 import { ShowcaseCarousel } from "@/components/showcaseCarousel";
