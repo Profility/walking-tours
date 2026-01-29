@@ -1,7 +1,14 @@
 import { Alex_Brush } from "next/font/google";
 import { ShowcaseCarousel } from "@/components/showcaseCarousel";
 import { getAllImages } from "@/lib/utils";
+import { Metadata } from "next";
+
 const destinations = await getAllImages();
+
+export const metadata: Metadata = {
+  title: "Home - Lakbay Lucban",
+  description: "Welcome to Lucban, Quezon. Explore our history, culture, and tourism offerings. Aba'y baling rikit at baling saya dini!",
+};
 
 const alex_brush = Alex_Brush({ subsets: ["latin"], weight: "400"});
 const images = destinations;

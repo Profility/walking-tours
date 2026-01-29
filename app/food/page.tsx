@@ -3,6 +3,12 @@ export const revalidate = 10;
 import { retrieveData } from "@/lib/supabase";
 import { getImageBySlug } from "@/lib/utils";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Local Food & Delicacies - Lakbay Lucban",
+  description: "Discover the delicious local food and delicacies of Lucban, Quezon. From longganisang Lucban to traditional recipes, taste the flavors of our town.",
+};
 
 export default async function Home() {
   const food = await retrieveData("food");

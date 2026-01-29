@@ -2,6 +2,12 @@ export const revalidate = 10;
 
 import { ShowcaseCarousel } from "@/components/showcaseCarousel";
 import { anchor } from "@/components/anchor";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us - Lakbay Lucban",
+  description: "Learn about Lakbay Lucban, a QR-code web-based information system designed to enhance your visit to Lucban, Quezon with comprehensive tourism information.",
+};
 import {
   Accordion,
   AccordionContent,

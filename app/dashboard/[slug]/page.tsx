@@ -3,6 +3,26 @@ import { createClient } from "@/lib/supabase-server";
 import EditDestinationForm from "@/components/edit-destination-form";
 import LogoutButton from "@/components/logout-button";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const supabase = await createClient();
+  const { data: destination } = await supabase
+    .from("destinations")
+    .select("name")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  return {
+    title: destination ? `Edit ${destination.name} - Lakbay Lucban Dashboard` : "Edit Destination - Lakbay Lucban Dashboard",
+    description: "Edit destination details and content in the Lakbay Lucban dashboard.",
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

@@ -3,6 +3,12 @@ export const revalidate = 10;
 import { DestinationCard } from '@/components/destinationCard';
 import { retrieveData } from '@/lib/supabase';
 import { getImageBySlug } from '@/lib/utils';
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Destinations - Lakbay Lucban",
+  description: "Explore all destinations in Lucban, Quezon. From nature reserves and heritage sites to resorts and faith destinations, discover what makes Lucban unique.",
+};
 
 export default async function Home() {
   const allDestinations = await retrieveData("destinations");

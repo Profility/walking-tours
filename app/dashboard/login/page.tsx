@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 import {
     Field,
@@ -53,6 +54,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="w-full max-w-md p-8">
+          <div className="flex justify-center">
+            <Image src="/logo_noborder.ico" alt="Lakbay Lucban Logo" width={86} height={86} />
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <FieldSet>
                 <FieldGroup>

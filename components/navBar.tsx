@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/input-group";
 import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import { Search, Menu } from "lucide-react";
+import Image from "next/image";
 
 const linkClasses = "font-bold text-[17px] focus:bg-gray-900 focus:text-white hover:text-gray-900 hover:bg-white transition-colors duration-200";
 
@@ -57,6 +58,9 @@ export default function Navbar({ items }: { items: Item[] }) {
           <SheetContent side="left" className="bg-gray-900 border-none text-white font-bold px-5 py-10 w-60 h-full">
             <SheetTitle></SheetTitle>
             <nav className="flex flex-col gap-6 text-xl">
+              <Link href="/" className="hover:opacity-80 transition-opacity">
+                <Image src="/logo.ico" alt="Lakbay Lucban Logo" width={64} height={64} />
+              </Link>
               <SheetClose asChild><Link href="/">Home</Link></SheetClose>
               <SheetClose asChild><Link href="/about-us">About Us</Link></SheetClose>
               <SheetClose asChild><Link href="/destinations">Destinations</Link></SheetClose>
@@ -69,6 +73,9 @@ export default function Navbar({ items }: { items: Item[] }) {
         <div className="hidden md:flex">
           <NavigationMenu>
             <NavigationMenuList className="gap-8">
+              <Link href="/" className="hover:opacity-80 transition-opacity ">
+                <Image src="/logo.ico" alt="Lakbay Lucban Logo" width={48} height={48} />
+              </Link>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild><Link href="/" className={linkClasses}>Home</Link></NavigationMenuLink>
               </NavigationMenuItem>
