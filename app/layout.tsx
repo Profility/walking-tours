@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/navBar";
 import { retrieveData } from "@/lib/supabase";
 import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={`${inter.className} antialiased`}>
         <Navbar items={items} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
