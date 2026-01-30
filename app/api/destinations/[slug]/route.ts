@@ -190,3 +190,66 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params;
+    const supabase = await createClient();
+    
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    const role = user?.user_metadata?.role;
+    const isSuperAdmin = role === "superadmin";
+    
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { data: destination, error: fetchError } = await supabase
+      .from('destinations')
+      .select('owner_id')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (fetchError || !destination) {
+      return NextResponse.json(
+        { error: 'Destination not found' },
+        { status: 404 }
+      );
+    }
+
+    if (destination.owner_id !== user.id && !isSuperAdmin) {
+      return NextResponse.json(
+        { error: 'Unauthorized: You do not own this destination' },
+        { status: 403 }
+      );
+    }
+
+    const { error: deleteError } = await supabase
+      .from('destinations')
+      .delete()
+      .eq('slug', slug);
+
+    if (deleteError) {
+      return NextResponse.json(
+        { error: deleteError.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ 
+      success: true,
+      message: 'Destination deleted successfully'
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'An error occurred while deleting the destination' },
+      { status: 500 }
+    );
+  }
+}

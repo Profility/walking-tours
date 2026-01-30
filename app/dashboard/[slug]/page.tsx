@@ -70,7 +70,7 @@ export default async function EditDestinationPage({ params }: PageProps) {
           <LogoutButton />
         </div>
 
-        <EditDestinationForm destination={destination} />
+        <EditDestinationForm destination={destination} isSuperAdmin={isSuperAdmin}/>
       </div>
     </div>
   );

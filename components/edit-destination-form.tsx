@@ -6,17 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import MDEditor from '@uiw/react-md-editor';
 
 
 import {
-  FieldDescription,
     FieldGroup,
     FieldLabel,
     FieldLegend,
     FieldSeparator,
     FieldSet,
   } from "@/components/ui/field"
+import DeleteDestinationButton from "./delete-destination-button";
+import { getImageBySlug } from "@/lib/utils";
 
 type Destination = {
   slug: string;
@@ -35,9 +37,10 @@ type Destination = {
 
 type EditDestinationFormProps = {
   destination: Destination;
+  isSuperAdmin: boolean;
 };
 
-export default function EditDestinationForm({ destination }: EditDestinationFormProps) {
+export default function EditDestinationForm({ destination, isSuperAdmin }: EditDestinationFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -131,7 +134,6 @@ export default function EditDestinationForm({ destination }: EditDestinationForm
                     </FieldGroup>
                     <FieldGroup className="flex flex-col gap-3">
                         <FieldLabel>Image *</FieldLabel>
-                        <FieldDescription>NOTE: Images may take a while to update on the page.</FieldDescription>
                         <Input id="image" type="file" accept=".jpg" onChange={(e) => setImage(e.target.files?.[0] ?? null)}/>
                     </FieldGroup>
                   </FieldSet>
@@ -181,6 +183,9 @@ export default function EditDestinationForm({ destination }: EditDestinationForm
                           </div>
                       )}
                       <Button type="submit" className="bg-gray-900" disabled={loading}>{loading ? "Saving..." : "Save Changes"}</Button>
+                      {isSuperAdmin && (
+                        <DeleteDestinationButton slug={destination.slug} />
+                      )}
                       <Button type="button" variant="outline" onClick={() => router.push("/dashboard")}>Cancel</Button>
                   </FieldSet>
                 </form>
